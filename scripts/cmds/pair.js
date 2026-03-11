@@ -26,21 +26,42 @@ module.exports = {
       const threadInfo = await api.getThreadInfo(event.threadID);
       const participants = threadInfo.participantIDs;
       
-      const filteredParticipants = participants.filter(id => 
+      const senderInfo = await api.getUserInfo(event.senderID);
+      const senderName = senderInfo[event.senderID].name;
+      const senderGender = senderInfo[event.senderID].gender?.toUpperCase() || (Math.random() > 0.5 ? "MALE" : "FEMALE");
+      
+      const usersInfo = await api.getUserInfo(participants);
+      
+      let matchCandidates = participants.filter(id => 
         id !== event.senderID && id !== api.getCurrentUserID()
       );
       
-      if (filteredParticipants.length === 0) {
+      if (senderGender === "MALE") {
+        matchCandidates = matchCandidates.filter(id => {
+          const userGender = usersInfo[id]?.gender?.toUpperCase();
+          return userGender === "FEMALE";
+        });
+      } else if (senderGender === "FEMALE") {
+        matchCandidates = matchCandidates.filter(id => {
+          const userGender = usersInfo[id]?.gender?.toUpperCase();
+          return userGender === "MALE";
+        });
+      }
+      
+      if (matchCandidates.length === 0) {
+        matchCandidates = participants.filter(id => 
+          id !== event.senderID && id !== api.getCurrentUserID()
+        );
+      }
+      
+      if (matchCandidates.length === 0) {
         return api.sendMessage("❌ No other members found to pair with!", event.threadID);
       }
       
-      const randomIndex = Math.floor(Math.random() * filteredParticipants.length);
-      const matchID = filteredParticipants[randomIndex];
+      const randomIndex = Math.floor(Math.random() * matchCandidates.length);
+      const matchID = matchCandidates[randomIndex];
       
-      const senderInfo = await api.getUserInfo(event.senderID);
       const matchInfo = await api.getUserInfo(matchID);
-      
-      const senderName = senderInfo[event.senderID].name;
       const matchName = matchInfo[matchID].name;
       
       const lovePercent = Math.floor(Math.random() * 31) + 70;
@@ -349,9 +370,14 @@ module.exports = {
       const buffer = canvas.toBuffer("image/png");
       fs.writeFileSync(imagePath, buffer);
       
-      const message = `🌸 𝗠𝗮𝘁𝗰𝗵𝗺𝗮𝗸𝗶𝗻𝗴 𝗖𝗼𝗺𝗽𝗹𝗲𝘁𝗲 🌸\n\n` +
-                     `💝 ${senderName}\n` +
-                     `💙 ${matchName}\n\n` +
+      const senderEmoji = senderGender === "FEMALE" ? "👩" : "👨";
+      const matchGender = matchInfo[matchID].gender?.toUpperCase();
+      const matchEmoji = matchGender === "FEMALE" ? "👩" : matchGender === "MALE" ? "👨" : "❓";
+      
+      const message = `🎀 𝗠𝗮𝘁𝗰𝗵𝗺𝗮𝗸𝗶𝗻𝗴 🎀\n\n` +
+                     `${senderEmoji} ${senderName} (${senderGender})\n` +
+                     `🎀\n` +
+                     `${matchEmoji} ${matchName} (${matchGender || "UNKNOWN"})\n\n` +
                      `😘 ${lovePercent}%`;
       
       await api.sendMessage({
