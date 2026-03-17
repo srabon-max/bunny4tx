@@ -19,7 +19,7 @@ module.exports = {
 
         const permission = [
             "61585772322631",
-            "",
+            "61585966465927",
             "",
             ""
 
