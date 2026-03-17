@@ -3,9 +3,9 @@ const fs = require("fs-extra");
 const path = require("path");
 
 const ownerInfo = {
-  name: "𝐄w'𝐫 𝐒𝐚𝐢𝐦",
-  facebook: "https://facebook.com/61565898444113",
-  telegram: "@saimx69x",
+  name: "—͟͞͞𝐵𝑈𝑁𝑁𝑌〆⚡",
+  facebook: "https://facebook.com/61585966465927",
+  telegram: "nai🐸",
   supportGroup: "https://m.me/j/AbZP4jRGu45w70du/"
 };
 
