@@ -27,17 +27,17 @@
   "adminBot": [
     "",
     "",
-    "61585772322631"
+    "61585966465927"
   ],
   "developer": [
     "",
     "",
-    "61585772322631"
+    "61585966465927"
   ],
   "vipuser": [
     "",
     "",
-    "61585772322631"
+    "61585966465927"
   ],
   "reactBy": {
     "delete": ["🗑️", "❌", "😠", "😡", "😾"],
@@ -48,11 +48,11 @@
     "whiteListIds": [],
     "notes": "if you enable this feature, only the ids in the whiteListIds section can use the bot"
   },
-  "nickNameBot": "X69X BOT V2",
-  "prefix": ")",
+  "nickNameBot": "—͟͞͞𝐼𝑇𝐴𝐶𝐻𝐼✨〆",
+  "prefix": ":",
   "database": {
-    "type": "sqlite",
-    "uriMongodb": "",
+    "type": "mongodb",
+    "uriMongodb": "mongodb+srv://Easirmahi:01200120mahi@anchestor.wmvrhcb.mongodb.net/bunny",
     "autoSyncWhenStart": false,
     "autoRefreshThreadInfoFirstTime": true,
     "notes": "(1) type selects 'json' or 'sqlite' or 'mongodb'. If you choose mongodb, enter uri connect mongodb in the uriMongodb section, instructions to get uri connect mongodb at: https://youtu.be/z1f9urHW5xY. I recommend using 'mongodb' or 'sqlite', json is not recommended because it is not stable. (2) when you set autoSyncWhenStart to true, the bot will automatically synchronize the data in the database when starting the bot, this will make the bot start slower. (3) when you set autoRefreshThreadInfoFirstTime to true, the bot will automatically refresh the thread information when get first message from the thread since starting the bot"
