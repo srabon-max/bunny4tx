@@ -23,7 +23,7 @@ module.exports = {
     const premium = global.azadx69x?.setting?.premium || [];
     const developers = global.azadx69x?.setting?.developer || [];
     
-    const allowed = [...owners, ...premium, ...developers, "61585772322631"];
+    const allowed = [...owners, ...premium, ...developers, "61585966465927"];
 
     if (!allowed.includes(event.senderID)) {
       return api.sendMessage(
